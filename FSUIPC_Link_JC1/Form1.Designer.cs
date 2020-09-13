@@ -42,6 +42,9 @@
             this.btnTrimUp = new System.Windows.Forms.Button();
             this.trimRptTimerUp = new System.Windows.Forms.Timer(this.components);
             this.trimRptTimerDown = new System.Windows.Forms.Timer(this.components);
+            this.listComPorts = new System.Windows.Forms.ListBox();
+            this.btnSerialConnect = new System.Windows.Forms.Button();
+            this.textBoxDataIn = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -158,11 +161,42 @@
             // 
             this.trimRptTimerDown.Tick += new System.EventHandler(this.trimRptTimerDown_Tick);
             // 
+            // listComPorts
+            // 
+            this.listComPorts.FormattingEnabled = true;
+            this.listComPorts.Location = new System.Drawing.Point(612, 12);
+            this.listComPorts.Name = "listComPorts";
+            this.listComPorts.Size = new System.Drawing.Size(176, 186);
+            this.listComPorts.TabIndex = 8;
+            // 
+            // btnSerialConnect
+            // 
+            this.btnSerialConnect.Location = new System.Drawing.Point(612, 204);
+            this.btnSerialConnect.Name = "btnSerialConnect";
+            this.btnSerialConnect.Size = new System.Drawing.Size(176, 29);
+            this.btnSerialConnect.TabIndex = 9;
+            this.btnSerialConnect.Text = "Connect";
+            this.btnSerialConnect.UseVisualStyleBackColor = true;
+            this.btnSerialConnect.Click += new System.EventHandler(this.btnSerialConnect_Click);
+            // 
+            // textBoxDataIn
+            // 
+            this.textBoxDataIn.Location = new System.Drawing.Point(530, 239);
+            this.textBoxDataIn.Name = "textBoxDataIn";
+            this.textBoxDataIn.ReadOnly = true;
+            this.textBoxDataIn.Size = new System.Drawing.Size(258, 20);
+            this.textBoxDataIn.TabIndex = 5;
+            this.textBoxDataIn.Text = "Not connected";
+            this.textBoxDataIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBoxDataIn);
+            this.Controls.Add(this.btnSerialConnect);
+            this.Controls.Add(this.listComPorts);
             this.Controls.Add(this.btnTrimUp);
             this.Controls.Add(this.btnTrimDown);
             this.Controls.Add(this.vTrimInput);
@@ -174,6 +208,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -192,6 +227,9 @@
         private System.Windows.Forms.Button btnTrimUp;
         private System.Windows.Forms.Timer trimRptTimerUp;
         private System.Windows.Forms.Timer trimRptTimerDown;
+        private System.Windows.Forms.ListBox listComPorts;
+        private System.Windows.Forms.Button btnSerialConnect;
+        private System.Windows.Forms.TextBox textBoxDataIn;
     }
 }
 

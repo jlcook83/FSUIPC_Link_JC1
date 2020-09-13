@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FSUIPC;
+using SerialPortLib;
 
 
 namespace FSUIPC_Link_JC1
@@ -19,6 +21,12 @@ namespace FSUIPC_Link_JC1
         private Offset<short> trimInput = new Offset<short>(0x0BC0);
         private Offset<short> trimIndicator = new Offset<short>(0x0BC2);
 
+        SerialPortInput serialPort = new SerialPortInput();
+        string[] portNames;
+
+
+        private delegate void SetTextDeleg(string text);
+        private void si_DataReceived(string data) { textBoxDataIn.Text = data.Trim(); }
 
         public Form1()
         {
@@ -28,9 +36,33 @@ namespace FSUIPC_Link_JC1
             this.trimRptTimerDown.Interval = 50;
             this.trimRptTimerUp.Interval = 50;
 
+            portNames = SerialPort.GetPortNames();
 
+            foreach (string port in portNames)
+            {
+                listComPorts.Items.Add(port);
+            }
+
+            serialPort.ConnectionStatusChanged += delegate (object sender, ConnectionStatusChangedEventArgs args)
+            {
+                Console.WriteLine("Connected = {0}", args.Connected);
+                textBox1.Text = "Connected = " + args.Connected.ToString();
+            };
             
+            serialPort.MessageReceived += delegate (object sender, MessageReceivedEventArgs args)
+            {
+                Console.WriteLine("Received message: {0}\n Length: {1}", BitConverter.ToString(args.Data),args.Data.Length);
+                string data = BitConverter.ToString(args.Data);
+                this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
+
+                
+            };
+
+
         }
+
+        
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -57,7 +89,7 @@ namespace FSUIPC_Link_JC1
                     // Error occured so alert the user
                     MessageBox.Show("Connection Failed. " + ex.Message);
                 }
-                if(FSUIPCConnection.IsOpen)
+                if (FSUIPCConnection.IsOpen)
                 {
                     this.timer1.Start();
                     this.textBox1.Text = "Connected";
@@ -95,22 +127,22 @@ namespace FSUIPC_Link_JC1
 
         private void vTrimInput_Scroll(object sender, ScrollEventArgs e)
         {
-            
+
         }
 
         private void vTrimInput_MouseCaptureChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnTrimDown_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnTrimUp_Click(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -173,5 +205,13 @@ namespace FSUIPC_Link_JC1
             }
             else trimInput.Value = 16383;
         }
+
+        private void btnSerialConnect_Click(object sender, EventArgs e)
+        {
+            serialPort.SetPort(listComPorts.SelectedItem.ToString(), 115200);
+            serialPort.Connect();
+        }
+
+
     }
 }
