@@ -33,8 +33,8 @@ namespace FSUIPC_Link_JC1
         public Form1()
         {
             InitializeComponent();
-            this.timer1.Interval = 100;
-            this.timer2.Interval = 50;
+            this.timer1.Interval = 15;  // FSUIPC UPDATE INTERVAL
+            this.timer2.Interval = (int)(0.5 * this.timer1.Interval);   // used in animation of update indicator
             this.trimRptTimerDown.Interval = 50;
             this.trimRptTimerUp.Interval = 50;
 
@@ -132,9 +132,13 @@ namespace FSUIPC_Link_JC1
                         try
                         {
                             Int16 _val = Convert.ToInt16(valIn);
-                            if (_val > 16383) _val = 16383;
-                            if (_val < -16383) _val = -16383;
-                            trimInput.Value = _val;
+                            short _out;
+
+                            _out = (short)((((_val*-1 + 127) / 254.0) * 32766) - 16383);
+
+                            if (_val > 16383) _out = 16383;
+                            if (_val < -16383) _out = -16383;
+                            trimInput.Value = _out;
                         }
                         catch { }
                     }
