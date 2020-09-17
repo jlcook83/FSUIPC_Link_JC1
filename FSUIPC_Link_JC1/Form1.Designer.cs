@@ -45,6 +45,9 @@
             this.listComPorts = new System.Windows.Forms.ListBox();
             this.btnSerialConnect = new System.Windows.Forms.Button();
             this.textBoxDataIn = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textDiag = new System.Windows.Forms.TextBox();
+            this.hPollRate = new System.Windows.Forms.HScrollBar();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,6 +83,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textDiag);
             this.groupBox1.Controls.Add(this.rdoHearbeat);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox1);
@@ -181,19 +185,52 @@
             // 
             // textBoxDataIn
             // 
-            this.textBoxDataIn.Location = new System.Drawing.Point(530, 239);
+            this.textBoxDataIn.Location = new System.Drawing.Point(612, 239);
             this.textBoxDataIn.Name = "textBoxDataIn";
             this.textBoxDataIn.ReadOnly = true;
-            this.textBoxDataIn.Size = new System.Drawing.Size(258, 20);
+            this.textBoxDataIn.Size = new System.Drawing.Size(176, 20);
             this.textBoxDataIn.TabIndex = 5;
             this.textBoxDataIn.Text = "Not connected";
             this.textBoxDataIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(612, 265);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textDiag
+            // 
+            this.textDiag.Location = new System.Drawing.Point(611, 11);
+            this.textDiag.Name = "textDiag";
+            this.textDiag.ReadOnly = true;
+            this.textDiag.Size = new System.Drawing.Size(176, 20);
+            this.textDiag.TabIndex = 11;
+            this.textDiag.Text = "Diag";
+            this.textDiag.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // hPollRate
+            // 
+            this.hPollRate.Location = new System.Drawing.Point(182, 12);
+            this.hPollRate.Maximum = 500;
+            this.hPollRate.Minimum = 1;
+            this.hPollRate.Name = "hPollRate";
+            this.hPollRate.Size = new System.Drawing.Size(427, 47);
+            this.hPollRate.TabIndex = 11;
+            this.hPollRate.Value = 5;
+            this.hPollRate.ValueChanged += new System.EventHandler(this.hPollRate_ValueChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.hPollRate);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxDataIn);
             this.Controls.Add(this.btnSerialConnect);
             this.Controls.Add(this.listComPorts);
@@ -230,6 +267,9 @@
         private System.Windows.Forms.ListBox listComPorts;
         private System.Windows.Forms.Button btnSerialConnect;
         private System.Windows.Forms.TextBox textBoxDataIn;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textDiag;
+        private System.Windows.Forms.HScrollBar hPollRate;
     }
 }
 

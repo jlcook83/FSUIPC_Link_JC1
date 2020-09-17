@@ -10,7 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FSUIPC;
+using Microsoft.SqlServer.Server;
 using SerialPortLib;
+
+
 
 
 namespace FSUIPC_Link_JC1
@@ -20,6 +23,11 @@ namespace FSUIPC_Link_JC1
 
         private Offset<short> trimInput = new Offset<short>(0x0BC0);
         private Offset<short> trimIndicator = new Offset<short>(0x0BC2);
+        private Offset<short> apMaster = new Offset<short>(0x07BC);
+        private Offset<short> apAltHold = new Offset<short>(0x07D0);
+        private Offset<short> apVSHold = new Offset<short>(0x07EC);
+        private Offset<short> apAprHold = new Offset<short>(0x0800);
+        private Offset<short> apGlideHold = new Offset<short>(0x07FC);
 
         SerialPortInput serialPort = new SerialPortInput();
         string[] portNames;
@@ -27,16 +35,35 @@ namespace FSUIPC_Link_JC1
         byte[] bufferIn = new byte[100];
         string varIn, valIn;
 
+        int movepos = 0;
+        byte[] msg;
+        string cmdAP;
+        string cmdmove;
+
+        int testMode = 0;
+
+        struct testBits_struct
+        {
+            public bool AP;
+
+
+        }
+
+        testBits_struct tb = new testBits_struct();
+
         private delegate void SetTextDeleg(string text);
         private void si_DataReceived(string data) { textBoxDataIn.Text = data.Trim(); }
 
         public Form1()
         {
             InitializeComponent();
-            this.timer1.Interval = 15;  // FSUIPC UPDATE INTERVAL
+            this.timer1.Interval = 200;  // FSUIPC UPDATE INTERVAL
+            this.hPollRate.Value = this.timer1.Interval;
             this.timer2.Interval = (int)(0.5 * this.timer1.Interval);   // used in animation of update indicator
             this.trimRptTimerDown.Interval = 50;
             this.trimRptTimerUp.Interval = 50;
+
+            
 
             portNames = SerialPort.GetPortNames();
 
@@ -48,7 +75,7 @@ namespace FSUIPC_Link_JC1
             serialPort.ConnectionStatusChanged += delegate (object sender, ConnectionStatusChangedEventArgs args)
             {
                 Console.WriteLine("Connected = {0}", args.Connected);
-                textBox1.Text = "Connected = " + args.Connected.ToString();
+                textBoxDataIn.Text = "Connected = " + args.Connected.ToString();
             };
 
 
@@ -209,6 +236,43 @@ namespace FSUIPC_Link_JC1
             vTrimIndicator.Value = trimIndicator.Value;
             vTrimInput.Value = trimInput.Value;
 
+            //textDiag.Text = apMaster.Value.ToString();
+
+            bool bApMaster = Convert.ToBoolean(apMaster.Value);
+            textDiag.Text = apMaster.Value.ToString() + apAltHold.Value.ToString() + apVSHold.Value.ToString() + apAprHold.Value.ToString() + apGlideHold.Value.ToString() ;
+            //movepos = (int)((((trimIndicator.Value + 16383) / 32767.0) * 4800) - 2400) * -1;
+
+            
+
+            if (apMaster.Value == 1 || tb.AP) // && (apAltHold.Value == 1 || apVSHold.Value == 1 || apAprHold.Value == 1 || apGlideHold.Value == 1))
+            {
+                if (cmdAP != ">AP,1;")
+                {
+                    cmdAP = ">AP,1;";
+                    msg = Encoding.UTF8.GetBytes(cmdAP);
+                    serialPort.SendMessage(msg);
+                }
+            }
+            else
+            {
+                if (cmdAP != ">AP,0;")
+                {
+                    cmdAP = ">AP,0;";
+                    msg = Encoding.UTF8.GetBytes(cmdAP);
+                    serialPort.SendMessage(msg);
+                }
+            }
+
+            if (movepos != (int)((((trimIndicator.Value + 16383) / 32767.0) * 4800) - 2400) * -1)
+            {
+                movepos = (int)((((trimIndicator.Value + 16383) / 32767.0) * 4800) - 2400) * -1;
+                cmdmove = ">t," + movepos + ";";
+
+            msg = Encoding.UTF8.GetBytes(cmdmove);
+            serialPort.SendMessage(msg);
+            msg = Encoding.UTF8.GetBytes(cmdAP);
+            serialPort.SendMessage(msg);
+            }
 
 
 
@@ -308,9 +372,19 @@ namespace FSUIPC_Link_JC1
             else trimInput.Value = 16383;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tb.AP = !tb.AP;
+        }
+
+        private void hPollRate_ValueChanged(object sender, EventArgs e)
+        {
+            this.timer1.Interval = (int)hPollRate.Value;
+        }
+
         private void btnSerialConnect_Click(object sender, EventArgs e)
         {
-            serialPort.SetPort(listComPorts.SelectedItem.ToString(), 115200);
+            serialPort.SetPort(listComPorts.SelectedItem.ToString(), 57600);
             serialPort.Connect();
         }
 
