@@ -33,6 +33,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textDiag = new System.Windows.Forms.TextBox();
             this.rdoHearbeat = new System.Windows.Forms.RadioButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
@@ -46,7 +47,6 @@
             this.btnSerialConnect = new System.Windows.Forms.Button();
             this.textBoxDataIn = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.textDiag = new System.Windows.Forms.TextBox();
             this.hPollRate = new System.Windows.Forms.HScrollBar();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -92,6 +92,16 @@
             this.groupBox1.Size = new System.Drawing.Size(800, 37);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
+            // 
+            // textDiag
+            // 
+            this.textDiag.Location = new System.Drawing.Point(611, 11);
+            this.textDiag.Name = "textDiag";
+            this.textDiag.ReadOnly = true;
+            this.textDiag.Size = new System.Drawing.Size(176, 20);
+            this.textDiag.TabIndex = 11;
+            this.textDiag.Text = "Diag";
+            this.textDiag.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // rdoHearbeat
             // 
@@ -195,23 +205,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(612, 265);
+            this.button1.Location = new System.Drawing.Point(531, 236);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // textDiag
-            // 
-            this.textDiag.Location = new System.Drawing.Point(611, 11);
-            this.textDiag.Name = "textDiag";
-            this.textDiag.ReadOnly = true;
-            this.textDiag.Size = new System.Drawing.Size(176, 20);
-            this.textDiag.TabIndex = 11;
-            this.textDiag.Text = "Diag";
-            this.textDiag.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // hPollRate
             // 
