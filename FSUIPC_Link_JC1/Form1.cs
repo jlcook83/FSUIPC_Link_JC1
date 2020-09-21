@@ -375,8 +375,6 @@ namespace FSUIPC_Link_JC1
         private void button1_Click(object sender, EventArgs e)
         {
             tb.AP = !tb.AP;
-
-            textDiag.Text = "AP Override = " + tb.AP.ToString();
         }
 
         private void hPollRate_ValueChanged(object sender, EventArgs e)
