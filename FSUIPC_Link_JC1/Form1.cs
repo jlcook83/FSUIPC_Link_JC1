@@ -263,9 +263,9 @@ namespace FSUIPC_Link_JC1
                 }
             }
 
-            if (movepos != (int)((((trimIndicator.Value + 16383) / 32767.0) * 4800) - 2400) * -1)
+            if (movepos != (int)((((trimIndicator.Value + 16383) / 32767.0) * 4800*2) - 2400*2) * -1)
             {
-                movepos = (int)((((trimIndicator.Value + 16383) / 32767.0) * 4800) - 2400) * -1;
+                movepos = (int)((((trimIndicator.Value + 16383) / 32767.0) * 4800*2) - 2400*2) * -1;
                 cmdmove = ">t," + movepos + ";";
 
             msg = Encoding.UTF8.GetBytes(cmdmove);
