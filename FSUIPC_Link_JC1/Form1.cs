@@ -244,7 +244,7 @@ namespace FSUIPC_Link_JC1
 
             
 
-            if (apMaster.Value == 1 && !tb.AP) // && (apAltHold.Value == 1 || apVSHold.Value == 1 || apAprHold.Value == 1 || apGlideHold.Value == 1))
+            if (apMaster.Value == 1) // && (apAltHold.Value == 1 || apVSHold.Value == 1 || apAprHold.Value == 1 || apGlideHold.Value == 1))
             {
                 if (cmdAP != ">AP,1;")
                 {
@@ -263,11 +263,13 @@ namespace FSUIPC_Link_JC1
                 }
             }
 
-            if (movepos != (UInt16)((trimIndicator.Value + 16383) / 32766.0) * 65535)
+            textDiag.Text = movepos.ToString();
+            textBox1.Text = trimIndicator.Value.ToString();
+            if (movepos != (UInt16)((1-((trimIndicator.Value + 16383) / 32767.0)) * 65535))
             {
-                movepos = (UInt16)(((trimIndicator.Value + 16383) / 32766.0) * 65535);
+                movepos = (UInt16)((1-((trimIndicator.Value + 16383) / 32767.0)) * 65535);
                 cmdmove = ">t," + movepos + ";";
-
+                
             msg = Encoding.UTF8.GetBytes(cmdmove);
             serialPort.SendMessage(msg);
             msg = Encoding.UTF8.GetBytes(cmdAP);
@@ -405,7 +407,7 @@ namespace FSUIPC_Link_JC1
 
         private void vManualApMove_ValueChanged(object sender, EventArgs e)
         {
-            movepos = (UInt16)((1-((vManualApMove.Value + 16383) / 32766.0)) * 65535);
+            movepos = (UInt16)((1-((vManualApMove.Value + 16383) / 32767.0)) * 65535);
             cmdmove = ">t," + movepos + ";";
             textDiag.Text = cmdmove.ToString();
             msg = Encoding.UTF8.GetBytes(cmdmove);
@@ -436,6 +438,28 @@ namespace FSUIPC_Link_JC1
         private void btnSerialDisconnect_Click(object sender, EventArgs e)
         {
             serialPort.Disconnect();
+        }
+
+        private void rdoWheelRight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoWheelRight.Checked)
+            {
+                string _ts = ">invert,-1;";
+                msg = Encoding.UTF8.GetBytes(_ts);
+                textDiag.Text = _ts;
+                serialPort.SendMessage(msg);
+            }
+        }
+
+        private void rdoWheelLeft_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoWheelLeft.Checked)
+            {
+                string _ts = ">invert,1;";
+                msg = Encoding.UTF8.GetBytes(_ts);
+                textDiag.Text = _ts;
+                serialPort.SendMessage(msg);
+            }
         }
 
         private void btnSerialConnect_Click(object sender, EventArgs e)

@@ -39,6 +39,10 @@
             this.trimRptTimerUp = new System.Windows.Forms.Timer(this.components);
             this.trimRptTimerDown = new System.Windows.Forms.Timer(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rdoWheelRight = new System.Windows.Forms.RadioButton();
+            this.rdoWheelLeft = new System.Windows.Forms.RadioButton();
+            this.btnSerialDisconnect = new System.Windows.Forms.Button();
             this.bManMoveMin = new System.Windows.Forms.Button();
             this.bManMoveMax = new System.Windows.Forms.Button();
             this.vManualApMove = new System.Windows.Forms.VScrollBar();
@@ -53,9 +57,9 @@
             this.vTrimInput = new System.Windows.Forms.VScrollBar();
             this.vTrimIndicator = new System.Windows.Forms.VScrollBar();
             this.btnConnect = new System.Windows.Forms.Button();
-            this.btnSerialDisconnect = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,6 +133,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.btnSerialDisconnect);
             this.groupBox2.Controls.Add(this.bManMoveMin);
             this.groupBox2.Controls.Add(this.bManMoveMax);
@@ -143,6 +148,51 @@
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Trim Wheel";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rdoWheelRight);
+            this.groupBox4.Controls.Add(this.rdoWheelLeft);
+            this.groupBox4.Location = new System.Drawing.Point(7, 326);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(109, 65);
+            this.groupBox4.TabIndex = 23;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Wheel Orientation";
+            // 
+            // rdoWheelRight
+            // 
+            this.rdoWheelRight.AutoSize = true;
+            this.rdoWheelRight.Checked = true;
+            this.rdoWheelRight.Location = new System.Drawing.Point(20, 42);
+            this.rdoWheelRight.Name = "rdoWheelRight";
+            this.rdoWheelRight.Size = new System.Drawing.Size(50, 17);
+            this.rdoWheelRight.TabIndex = 1;
+            this.rdoWheelRight.TabStop = true;
+            this.rdoWheelRight.Text = "Right";
+            this.rdoWheelRight.UseVisualStyleBackColor = true;
+            this.rdoWheelRight.CheckedChanged += new System.EventHandler(this.rdoWheelRight_CheckedChanged);
+            // 
+            // rdoWheelLeft
+            // 
+            this.rdoWheelLeft.AutoSize = true;
+            this.rdoWheelLeft.Location = new System.Drawing.Point(20, 18);
+            this.rdoWheelLeft.Name = "rdoWheelLeft";
+            this.rdoWheelLeft.Size = new System.Drawing.Size(43, 17);
+            this.rdoWheelLeft.TabIndex = 0;
+            this.rdoWheelLeft.Text = "Left";
+            this.rdoWheelLeft.UseVisualStyleBackColor = true;
+            this.rdoWheelLeft.CheckedChanged += new System.EventHandler(this.rdoWheelLeft_CheckedChanged);
+            // 
+            // btnSerialDisconnect
+            // 
+            this.btnSerialDisconnect.Location = new System.Drawing.Point(108, 260);
+            this.btnSerialDisconnect.Name = "btnSerialDisconnect";
+            this.btnSerialDisconnect.Size = new System.Drawing.Size(176, 29);
+            this.btnSerialDisconnect.TabIndex = 22;
+            this.btnSerialDisconnect.Text = "Disconnect";
+            this.btnSerialDisconnect.UseVisualStyleBackColor = true;
+            this.btnSerialDisconnect.Click += new System.EventHandler(this.btnSerialDisconnect_Click);
             // 
             // bManMoveMin
             // 
@@ -168,7 +218,7 @@
             // 
             this.vManualApMove.LargeChange = 1;
             this.vManualApMove.Location = new System.Drawing.Point(27, 61);
-            this.vManualApMove.Maximum = 16383;
+            this.vManualApMove.Maximum = 16384;
             this.vManualApMove.Minimum = -16383;
             this.vManualApMove.Name = "vManualApMove";
             this.vManualApMove.Size = new System.Drawing.Size(75, 173);
@@ -291,16 +341,6 @@
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
-            // btnSerialDisconnect
-            // 
-            this.btnSerialDisconnect.Location = new System.Drawing.Point(108, 260);
-            this.btnSerialDisconnect.Name = "btnSerialDisconnect";
-            this.btnSerialDisconnect.Size = new System.Drawing.Size(176, 29);
-            this.btnSerialDisconnect.TabIndex = 22;
-            this.btnSerialDisconnect.Text = "Disconnect";
-            this.btnSerialDisconnect.UseVisualStyleBackColor = true;
-            this.btnSerialDisconnect.Click += new System.EventHandler(this.btnSerialDisconnect_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -316,6 +356,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -347,6 +389,9 @@
         private System.Windows.Forms.VScrollBar vTrimIndicator;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnSerialDisconnect;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton rdoWheelRight;
+        private System.Windows.Forms.RadioButton rdoWheelLeft;
     }
 }
 
