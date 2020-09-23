@@ -35,7 +35,7 @@ namespace FSUIPC_Link_JC1
         byte[] bufferIn = new byte[100];
         string varIn, valIn;
 
-        int movepos = 0;
+        UInt16 movepos = 0;
         byte[] msg;
         string cmdAP;
         string cmdmove;
@@ -244,7 +244,7 @@ namespace FSUIPC_Link_JC1
 
             
 
-            if (apMaster.Value == 1 || tb.AP) // && (apAltHold.Value == 1 || apVSHold.Value == 1 || apAprHold.Value == 1 || apGlideHold.Value == 1))
+            if (apMaster.Value == 1 && !tb.AP) // && (apAltHold.Value == 1 || apVSHold.Value == 1 || apAprHold.Value == 1 || apGlideHold.Value == 1))
             {
                 if (cmdAP != ">AP,1;")
                 {
@@ -263,9 +263,9 @@ namespace FSUIPC_Link_JC1
                 }
             }
 
-            if (movepos != (int)((((trimIndicator.Value + 16383) / 32767.0) * 4800*2) - 2400*2) * -1)
+            if (movepos != (UInt16)((trimIndicator.Value + 16383) / 32766.0) * 65535)
             {
-                movepos = (int)((((trimIndicator.Value + 16383) / 32767.0) * 4800*2) - 2400*2) * -1;
+                movepos = (UInt16)(((trimIndicator.Value + 16383) / 32766.0) * 65535);
                 cmdmove = ">t," + movepos + ";";
 
             msg = Encoding.UTF8.GetBytes(cmdmove);
@@ -375,11 +375,67 @@ namespace FSUIPC_Link_JC1
         private void button1_Click(object sender, EventArgs e)
         {
             tb.AP = !tb.AP;
-        }
+
+            if (tb.AP)
+            {
+                cmdAP = ">AP,1;";
+                msg = Encoding.UTF8.GetBytes(cmdAP);
+                serialPort.SendMessage(msg);
+
+                vManualApMove_ValueChanged(sender, e);
+            }
+
+            else
+            {
+                cmdAP = ">AP,0;";
+                msg = Encoding.UTF8.GetBytes(cmdAP);
+                serialPort.SendMessage(msg);
+            }
+        }// last bracket
 
         private void hPollRate_ValueChanged(object sender, EventArgs e)
         {
             this.timer1.Interval = (int)hPollRate.Value;
+        }
+
+        private void vManualApMove_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
+        private void vManualApMove_ValueChanged(object sender, EventArgs e)
+        {
+            movepos = (UInt16)((1-((vManualApMove.Value + 16383) / 32766.0)) * 65535);
+            cmdmove = ">t," + movepos + ";";
+            textDiag.Text = cmdmove.ToString();
+            msg = Encoding.UTF8.GetBytes(cmdmove);
+            serialPort.SendMessage(msg);
+            
+        }
+
+        private void bManMoveMin_Click(object sender, EventArgs e)
+        {
+            vManualApMove.Value = vManualApMove.Minimum;
+        }
+
+        private void bManMoveMax_Click(object sender, EventArgs e)
+        {
+            vManualApMove.Value = vManualApMove.Maximum;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void hPollRate_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
+        private void btnSerialDisconnect_Click(object sender, EventArgs e)
+        {
+            serialPort.Disconnect();
         }
 
         private void btnSerialConnect_Click(object sender, EventArgs e)
