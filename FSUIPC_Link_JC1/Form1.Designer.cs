@@ -57,10 +57,20 @@
             this.vTrimInput = new System.Windows.Forms.VScrollBar();
             this.vTrimIndicator = new System.Windows.Forms.VScrollBar();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rdoWheelSlow = new System.Windows.Forms.RadioButton();
+            this.rdoWheelFast = new System.Windows.Forms.RadioButton();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.numWheelRange = new System.Windows.Forms.NumericUpDown();
+            this.btnPreset1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numWheelRange)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -97,7 +107,7 @@
             // 
             // textDiag
             // 
-            this.textDiag.Location = new System.Drawing.Point(381, 11);
+            this.textDiag.Location = new System.Drawing.Point(410, 11);
             this.textDiag.Name = "textDiag";
             this.textDiag.ReadOnly = true;
             this.textDiag.Size = new System.Drawing.Size(176, 20);
@@ -133,6 +143,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.btnPreset1);
+            this.groupBox2.Controls.Add(this.groupBox6);
+            this.groupBox2.Controls.Add(this.groupBox5);
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.btnSerialDisconnect);
             this.groupBox2.Controls.Add(this.bManMoveMin);
@@ -144,7 +158,7 @@
             this.groupBox2.Controls.Add(this.listComPorts);
             this.groupBox2.Location = new System.Drawing.Point(274, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(296, 397);
+            this.groupBox2.Size = new System.Drawing.Size(316, 397);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Trim Wheel";
@@ -196,7 +210,7 @@
             // 
             // bManMoveMin
             // 
-            this.bManMoveMin.Location = new System.Drawing.Point(27, 37);
+            this.bManMoveMin.Location = new System.Drawing.Point(27, 104);
             this.bManMoveMin.Name = "bManMoveMin";
             this.bManMoveMin.Size = new System.Drawing.Size(75, 21);
             this.bManMoveMin.TabIndex = 21;
@@ -206,7 +220,7 @@
             // 
             // bManMoveMax
             // 
-            this.bManMoveMax.Location = new System.Drawing.Point(27, 237);
+            this.bManMoveMax.Location = new System.Drawing.Point(27, 264);
             this.bManMoveMax.Name = "bManMoveMax";
             this.bManMoveMax.Size = new System.Drawing.Size(75, 21);
             this.bManMoveMax.TabIndex = 20;
@@ -217,18 +231,18 @@
             // vManualApMove
             // 
             this.vManualApMove.LargeChange = 1;
-            this.vManualApMove.Location = new System.Drawing.Point(27, 61);
+            this.vManualApMove.Location = new System.Drawing.Point(27, 128);
             this.vManualApMove.Maximum = 16384;
             this.vManualApMove.Minimum = -16383;
             this.vManualApMove.Name = "vManualApMove";
-            this.vManualApMove.Size = new System.Drawing.Size(75, 173);
+            this.vManualApMove.Size = new System.Drawing.Size(75, 130);
             this.vManualApMove.TabIndex = 19;
             this.vManualApMove.Value = -16383;
             this.vManualApMove.ValueChanged += new System.EventHandler(this.vManualApMove_ValueChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(27, 264);
+            this.button1.Location = new System.Drawing.Point(27, 289);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 20);
             this.button1.TabIndex = 18;
@@ -341,11 +355,88 @@
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.rdoWheelSlow);
+            this.groupBox5.Controls.Add(this.rdoWheelFast);
+            this.groupBox5.Location = new System.Drawing.Point(122, 326);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(89, 65);
+            this.groupBox5.TabIndex = 24;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Wheel Speed";
+            // 
+            // rdoWheelSlow
+            // 
+            this.rdoWheelSlow.AutoSize = true;
+            this.rdoWheelSlow.Checked = true;
+            this.rdoWheelSlow.Location = new System.Drawing.Point(20, 42);
+            this.rdoWheelSlow.Name = "rdoWheelSlow";
+            this.rdoWheelSlow.Size = new System.Drawing.Size(48, 17);
+            this.rdoWheelSlow.TabIndex = 1;
+            this.rdoWheelSlow.TabStop = true;
+            this.rdoWheelSlow.Text = "Slow";
+            this.rdoWheelSlow.UseVisualStyleBackColor = true;
+            this.rdoWheelSlow.CheckedChanged += new System.EventHandler(this.rdoWheelSlow_CheckedChanged);
+            // 
+            // rdoWheelFast
+            // 
+            this.rdoWheelFast.AutoSize = true;
+            this.rdoWheelFast.Location = new System.Drawing.Point(20, 18);
+            this.rdoWheelFast.Name = "rdoWheelFast";
+            this.rdoWheelFast.Size = new System.Drawing.Size(45, 17);
+            this.rdoWheelFast.TabIndex = 0;
+            this.rdoWheelFast.Text = "Fast";
+            this.rdoWheelFast.UseVisualStyleBackColor = true;
+            this.rdoWheelFast.CheckedChanged += new System.EventHandler(this.rdoWheelFast_CheckedChanged);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.numWheelRange);
+            this.groupBox6.Location = new System.Drawing.Point(217, 326);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(87, 65);
+            this.groupBox6.TabIndex = 25;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Wheel Range";
+            // 
+            // numWheelRange
+            // 
+            this.numWheelRange.Location = new System.Drawing.Point(7, 29);
+            this.numWheelRange.Name = "numWheelRange";
+            this.numWheelRange.Size = new System.Drawing.Size(74, 20);
+            this.numWheelRange.TabIndex = 0;
+            this.numWheelRange.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numWheelRange.ValueChanged += new System.EventHandler(this.numWheelRange_ValueChanged);
+            // 
+            // btnPreset1
+            // 
+            this.btnPreset1.Location = new System.Drawing.Point(27, 45);
+            this.btnPreset1.Name = "btnPreset1";
+            this.btnPreset1.Size = new System.Drawing.Size(75, 21);
+            this.btnPreset1.TabIndex = 26;
+            this.btnPreset1.Text = "C-172";
+            this.btnPreset1.UseVisualStyleBackColor = true;
+            this.btnPreset1.Click += new System.EventHandler(this.btnPreset1_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(27, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Presets";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 450);
+            this.ClientSize = new System.Drawing.Size(599, 450);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -359,6 +450,10 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numWheelRange)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -392,6 +487,13 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton rdoWheelRight;
         private System.Windows.Forms.RadioButton rdoWheelLeft;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.NumericUpDown numWheelRange;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton rdoWheelSlow;
+        private System.Windows.Forms.RadioButton rdoWheelFast;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnPreset1;
     }
 }
 

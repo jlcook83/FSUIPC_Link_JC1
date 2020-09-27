@@ -57,6 +57,18 @@ namespace FSUIPC_Link_JC1
         public Form1()
         {
             InitializeComponent();
+
+            btnPreset1.Enabled = false;
+            button1.Enabled = false;
+            rdoWheelFast.Enabled = false;
+            rdoWheelSlow.Enabled = false;
+            rdoWheelRight.Enabled = false;
+            rdoWheelLeft.Enabled = false;
+            vManualApMove.Enabled = false;
+            numWheelRange.Enabled = false;
+            bManMoveMax.Enabled = false;
+            bManMoveMin.Enabled = false;
+
             this.timer1.Interval = 200;  // FSUIPC UPDATE INTERVAL
             this.hPollRate.Value = this.timer1.Interval;
             this.timer2.Interval = (int)(0.5 * this.timer1.Interval);   // used in animation of update indicator
@@ -76,6 +88,32 @@ namespace FSUIPC_Link_JC1
             {
                 Console.WriteLine("Connected = {0}", args.Connected);
                 textBoxDataIn.Text = "Connected = " + args.Connected.ToString();
+                if (args.Connected)
+                {
+                    btnPreset1.Enabled = true;
+                    button1.Enabled = true;
+                    rdoWheelFast.Enabled = true;
+                    rdoWheelSlow.Enabled = true;
+                    rdoWheelRight.Enabled = true;
+                    rdoWheelLeft.Enabled = true;
+                    vManualApMove.Enabled = true;
+                    numWheelRange.Enabled = true;
+                    bManMoveMax.Enabled = true;
+                    bManMoveMin.Enabled = true;
+                }
+                else
+                {
+                    btnPreset1.Enabled = false;
+                    button1.Enabled = false;
+                    rdoWheelFast.Enabled = false;
+                    rdoWheelSlow.Enabled = false;
+                    rdoWheelRight.Enabled = false;
+                    rdoWheelLeft.Enabled = false;
+                    vManualApMove.Enabled = false;
+                    numWheelRange.Enabled = false;
+                    bManMoveMax.Enabled = false;
+                    bManMoveMin.Enabled = false;
+                }
             };
 
 
@@ -380,6 +418,7 @@ namespace FSUIPC_Link_JC1
 
             if (tb.AP)
             {
+                button1.BackColor = Color.IndianRed;
                 cmdAP = ">AP,1;";
                 msg = Encoding.UTF8.GetBytes(cmdAP);
                 serialPort.SendMessage(msg);
@@ -389,6 +428,7 @@ namespace FSUIPC_Link_JC1
 
             else
             {
+                button1.BackColor = SystemColors.Control;
                 cmdAP = ">AP,0;";
                 msg = Encoding.UTF8.GetBytes(cmdAP);
                 serialPort.SendMessage(msg);
@@ -462,10 +502,63 @@ namespace FSUIPC_Link_JC1
             }
         }
 
+        private void rdoWheelFast_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoWheelFast.Checked)
+            {
+                string _ts = ">apspeed,1;";
+                msg = Encoding.UTF8.GetBytes(_ts);
+                textDiag.Text = _ts;
+                serialPort.SendMessage(msg);
+            }
+        }
+
+        private void rdoWheelSlow_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoWheelSlow.Checked)
+            {
+                string _ts = ">apspeed,0;";
+                msg = Encoding.UTF8.GetBytes(_ts);
+                textDiag.Text = _ts;
+                serialPort.SendMessage(msg);
+            }
+        }
+
+        private void numWheelRange_ValueChanged(object sender, EventArgs e)
+        {
+            numWheelRange.Value = Math.Truncate(numWheelRange.Value);
+            if (numWheelRange.Value > 12) numWheelRange.Value = 12;
+            if (numWheelRange.Value < 1) numWheelRange.Value = 1;
+            string _ts = ">wheelrange,"+numWheelRange.Value+";";
+            msg = Encoding.UTF8.GetBytes(_ts);
+            textDiag.Text = _ts;
+            serialPort.SendMessage(msg);
+
+        }
+
+        private void btnPreset1_Click(object sender, EventArgs e)
+        {
+            rdoWheelFast.Checked = true;
+            numWheelRange.Value = 4;
+        }
+
         private void btnSerialConnect_Click(object sender, EventArgs e)
         {
             serialPort.SetPort(listComPorts.SelectedItem.ToString(), 57600);
             serialPort.Connect();
+            /*
+            btnPreset1.Enabled = true;
+            button1.Enabled = true;
+            rdoWheelFast.Enabled = true;
+            rdoWheelSlow.Enabled = true;
+            rdoWheelRight.Enabled = true;
+            rdoWheelLeft.Enabled = true;
+            vManualApMove.Enabled = true;
+            numWheelRange.Enabled = true;
+            bManMoveMax.Enabled = false;
+            bManMoveMin.Enabled = false;
+            */
+
         }
 
 
