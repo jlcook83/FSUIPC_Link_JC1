@@ -39,9 +39,16 @@
             this.trimRptTimerUp = new System.Windows.Forms.Timer(this.components);
             this.trimRptTimerDown = new System.Windows.Forms.Timer(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnPreset1 = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.numWheelRange = new System.Windows.Forms.NumericUpDown();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rdoWheelSlow = new System.Windows.Forms.RadioButton();
+            this.rdoWheelFast = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rdoWheelRight = new System.Windows.Forms.RadioButton();
-            this.rdoWheelLeft = new System.Windows.Forms.RadioButton();
+            this.rdoWheel_Left = new System.Windows.Forms.RadioButton();
+            this.rdoWheel_Right = new System.Windows.Forms.RadioButton();
             this.btnSerialDisconnect = new System.Windows.Forms.Button();
             this.bManMoveMin = new System.Windows.Forms.Button();
             this.bManMoveMax = new System.Windows.Forms.Button();
@@ -57,20 +64,13 @@
             this.vTrimInput = new System.Windows.Forms.VScrollBar();
             this.vTrimIndicator = new System.Windows.Forms.VScrollBar();
             this.btnConnect = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.rdoWheelSlow = new System.Windows.Forms.RadioButton();
-            this.rdoWheelFast = new System.Windows.Forms.RadioButton();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.numWheelRange = new System.Windows.Forms.NumericUpDown();
-            this.btnPreset1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numWheelRange)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -163,10 +163,87 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Trim Wheel";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(27, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Presets";
+            // 
+            // btnPreset1
+            // 
+            this.btnPreset1.Location = new System.Drawing.Point(27, 45);
+            this.btnPreset1.Name = "btnPreset1";
+            this.btnPreset1.Size = new System.Drawing.Size(75, 21);
+            this.btnPreset1.TabIndex = 26;
+            this.btnPreset1.Text = "C-172";
+            this.btnPreset1.UseVisualStyleBackColor = true;
+            this.btnPreset1.Click += new System.EventHandler(this.btnPreset1_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.numWheelRange);
+            this.groupBox6.Location = new System.Drawing.Point(217, 326);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(87, 65);
+            this.groupBox6.TabIndex = 25;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Wheel Range";
+            // 
+            // numWheelRange
+            // 
+            this.numWheelRange.Location = new System.Drawing.Point(7, 29);
+            this.numWheelRange.Name = "numWheelRange";
+            this.numWheelRange.Size = new System.Drawing.Size(74, 20);
+            this.numWheelRange.TabIndex = 0;
+            this.numWheelRange.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numWheelRange.ValueChanged += new System.EventHandler(this.numWheelRange_ValueChanged);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.rdoWheelSlow);
+            this.groupBox5.Controls.Add(this.rdoWheelFast);
+            this.groupBox5.Location = new System.Drawing.Point(122, 326);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(89, 65);
+            this.groupBox5.TabIndex = 24;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Wheel Speed";
+            // 
+            // rdoWheelSlow
+            // 
+            this.rdoWheelSlow.AutoSize = true;
+            this.rdoWheelSlow.Checked = true;
+            this.rdoWheelSlow.Location = new System.Drawing.Point(20, 42);
+            this.rdoWheelSlow.Name = "rdoWheelSlow";
+            this.rdoWheelSlow.Size = new System.Drawing.Size(48, 17);
+            this.rdoWheelSlow.TabIndex = 1;
+            this.rdoWheelSlow.TabStop = true;
+            this.rdoWheelSlow.Text = "Slow";
+            this.rdoWheelSlow.UseVisualStyleBackColor = true;
+            this.rdoWheelSlow.CheckedChanged += new System.EventHandler(this.rdoWheelSlow_CheckedChanged);
+            // 
+            // rdoWheelFast
+            // 
+            this.rdoWheelFast.AutoSize = true;
+            this.rdoWheelFast.Location = new System.Drawing.Point(20, 18);
+            this.rdoWheelFast.Name = "rdoWheelFast";
+            this.rdoWheelFast.Size = new System.Drawing.Size(45, 17);
+            this.rdoWheelFast.TabIndex = 0;
+            this.rdoWheelFast.Text = "Fast";
+            this.rdoWheelFast.UseVisualStyleBackColor = true;
+            this.rdoWheelFast.CheckedChanged += new System.EventHandler(this.rdoWheelFast_CheckedChanged);
+            // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.rdoWheelRight);
-            this.groupBox4.Controls.Add(this.rdoWheelLeft);
+            this.groupBox4.Controls.Add(this.rdoWheel_Left);
+            this.groupBox4.Controls.Add(this.rdoWheel_Right);
             this.groupBox4.Location = new System.Drawing.Point(7, 326);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(109, 65);
@@ -174,29 +251,29 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Wheel Orientation";
             // 
-            // rdoWheelRight
+            // rdoWheel_Left
             // 
-            this.rdoWheelRight.AutoSize = true;
-            this.rdoWheelRight.Checked = true;
-            this.rdoWheelRight.Location = new System.Drawing.Point(20, 42);
-            this.rdoWheelRight.Name = "rdoWheelRight";
-            this.rdoWheelRight.Size = new System.Drawing.Size(50, 17);
-            this.rdoWheelRight.TabIndex = 1;
-            this.rdoWheelRight.TabStop = true;
-            this.rdoWheelRight.Text = "Right";
-            this.rdoWheelRight.UseVisualStyleBackColor = true;
-            this.rdoWheelRight.CheckedChanged += new System.EventHandler(this.rdoWheelRight_CheckedChanged);
+            this.rdoWheel_Left.AutoSize = true;
+            this.rdoWheel_Left.Location = new System.Drawing.Point(20, 42);
+            this.rdoWheel_Left.Name = "rdoWheel_Left";
+            this.rdoWheel_Left.Size = new System.Drawing.Size(43, 17);
+            this.rdoWheel_Left.TabIndex = 1;
+            this.rdoWheel_Left.Text = "Left";
+            this.rdoWheel_Left.UseVisualStyleBackColor = true;
+            this.rdoWheel_Left.CheckedChanged += new System.EventHandler(this.rdoWheel_Left_CheckedChanged);
             // 
-            // rdoWheelLeft
+            // rdoWheel_Right
             // 
-            this.rdoWheelLeft.AutoSize = true;
-            this.rdoWheelLeft.Location = new System.Drawing.Point(20, 18);
-            this.rdoWheelLeft.Name = "rdoWheelLeft";
-            this.rdoWheelLeft.Size = new System.Drawing.Size(43, 17);
-            this.rdoWheelLeft.TabIndex = 0;
-            this.rdoWheelLeft.Text = "Left";
-            this.rdoWheelLeft.UseVisualStyleBackColor = true;
-            this.rdoWheelLeft.CheckedChanged += new System.EventHandler(this.rdoWheelLeft_CheckedChanged);
+            this.rdoWheel_Right.AutoSize = true;
+            this.rdoWheel_Right.Checked = true;
+            this.rdoWheel_Right.Location = new System.Drawing.Point(20, 18);
+            this.rdoWheel_Right.Name = "rdoWheel_Right";
+            this.rdoWheel_Right.Size = new System.Drawing.Size(50, 17);
+            this.rdoWheel_Right.TabIndex = 0;
+            this.rdoWheel_Right.TabStop = true;
+            this.rdoWheel_Right.Text = "Right";
+            this.rdoWheel_Right.UseVisualStyleBackColor = true;
+            this.rdoWheel_Right.CheckedChanged += new System.EventHandler(this.rdoWheel_Right_CheckedChanged);
             // 
             // btnSerialDisconnect
             // 
@@ -214,17 +291,17 @@
             this.bManMoveMin.Name = "bManMoveMin";
             this.bManMoveMin.Size = new System.Drawing.Size(75, 21);
             this.bManMoveMin.TabIndex = 21;
-            this.bManMoveMin.Text = "max";
+            this.bManMoveMin.Text = "Nose Down";
             this.bManMoveMin.UseVisualStyleBackColor = true;
             this.bManMoveMin.Click += new System.EventHandler(this.bManMoveMin_Click);
             // 
             // bManMoveMax
             // 
-            this.bManMoveMax.Location = new System.Drawing.Point(27, 264);
+            this.bManMoveMax.Location = new System.Drawing.Point(27, 260);
             this.bManMoveMax.Name = "bManMoveMax";
             this.bManMoveMax.Size = new System.Drawing.Size(75, 21);
             this.bManMoveMax.TabIndex = 20;
-            this.bManMoveMax.Text = "min";
+            this.bManMoveMax.Text = "Nose Up";
             this.bManMoveMax.UseVisualStyleBackColor = true;
             this.bManMoveMax.Click += new System.EventHandler(this.bManMoveMax_Click);
             // 
@@ -237,7 +314,8 @@
             this.vManualApMove.Name = "vManualApMove";
             this.vManualApMove.Size = new System.Drawing.Size(75, 130);
             this.vManualApMove.TabIndex = 19;
-            this.vManualApMove.Value = -16383;
+            this.vManualApMove.Value = 16383;
+            this.vManualApMove.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vManualApMove_Scroll_1);
             this.vManualApMove.ValueChanged += new System.EventHandler(this.vManualApMove_ValueChanged);
             // 
             // button1
@@ -355,83 +433,6 @@
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.rdoWheelSlow);
-            this.groupBox5.Controls.Add(this.rdoWheelFast);
-            this.groupBox5.Location = new System.Drawing.Point(122, 326);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(89, 65);
-            this.groupBox5.TabIndex = 24;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Wheel Speed";
-            // 
-            // rdoWheelSlow
-            // 
-            this.rdoWheelSlow.AutoSize = true;
-            this.rdoWheelSlow.Checked = true;
-            this.rdoWheelSlow.Location = new System.Drawing.Point(20, 42);
-            this.rdoWheelSlow.Name = "rdoWheelSlow";
-            this.rdoWheelSlow.Size = new System.Drawing.Size(48, 17);
-            this.rdoWheelSlow.TabIndex = 1;
-            this.rdoWheelSlow.TabStop = true;
-            this.rdoWheelSlow.Text = "Slow";
-            this.rdoWheelSlow.UseVisualStyleBackColor = true;
-            this.rdoWheelSlow.CheckedChanged += new System.EventHandler(this.rdoWheelSlow_CheckedChanged);
-            // 
-            // rdoWheelFast
-            // 
-            this.rdoWheelFast.AutoSize = true;
-            this.rdoWheelFast.Location = new System.Drawing.Point(20, 18);
-            this.rdoWheelFast.Name = "rdoWheelFast";
-            this.rdoWheelFast.Size = new System.Drawing.Size(45, 17);
-            this.rdoWheelFast.TabIndex = 0;
-            this.rdoWheelFast.Text = "Fast";
-            this.rdoWheelFast.UseVisualStyleBackColor = true;
-            this.rdoWheelFast.CheckedChanged += new System.EventHandler(this.rdoWheelFast_CheckedChanged);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.numWheelRange);
-            this.groupBox6.Location = new System.Drawing.Point(217, 326);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(87, 65);
-            this.groupBox6.TabIndex = 25;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Wheel Range";
-            // 
-            // numWheelRange
-            // 
-            this.numWheelRange.Location = new System.Drawing.Point(7, 29);
-            this.numWheelRange.Name = "numWheelRange";
-            this.numWheelRange.Size = new System.Drawing.Size(74, 20);
-            this.numWheelRange.TabIndex = 0;
-            this.numWheelRange.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numWheelRange.ValueChanged += new System.EventHandler(this.numWheelRange_ValueChanged);
-            // 
-            // btnPreset1
-            // 
-            this.btnPreset1.Location = new System.Drawing.Point(27, 45);
-            this.btnPreset1.Name = "btnPreset1";
-            this.btnPreset1.Size = new System.Drawing.Size(75, 21);
-            this.btnPreset1.TabIndex = 26;
-            this.btnPreset1.Text = "C-172";
-            this.btnPreset1.UseVisualStyleBackColor = true;
-            this.btnPreset1.Click += new System.EventHandler(this.btnPreset1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Presets";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,17 +444,18 @@
             this.Name = "Form1";
             this.Text = "FSUIPC Link";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numWheelRange)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numWheelRange)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -485,8 +487,8 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnSerialDisconnect;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton rdoWheelRight;
-        private System.Windows.Forms.RadioButton rdoWheelLeft;
+        private System.Windows.Forms.RadioButton rdoWheel_Left;
+        private System.Windows.Forms.RadioButton rdoWheel_Right;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.NumericUpDown numWheelRange;
         private System.Windows.Forms.GroupBox groupBox5;

@@ -62,8 +62,8 @@ namespace FSUIPC_Link_JC1
             button1.Enabled = false;
             rdoWheelFast.Enabled = false;
             rdoWheelSlow.Enabled = false;
-            rdoWheelRight.Enabled = false;
-            rdoWheelLeft.Enabled = false;
+            rdoWheel_Left.Enabled = false;
+            rdoWheel_Right.Enabled = false;
             vManualApMove.Enabled = false;
             numWheelRange.Enabled = false;
             bManMoveMax.Enabled = false;
@@ -94,8 +94,8 @@ namespace FSUIPC_Link_JC1
                     button1.Enabled = true;
                     rdoWheelFast.Enabled = true;
                     rdoWheelSlow.Enabled = true;
-                    rdoWheelRight.Enabled = true;
-                    rdoWheelLeft.Enabled = true;
+                    rdoWheel_Left.Enabled = true;
+                    rdoWheel_Right.Enabled = true;
                     vManualApMove.Enabled = true;
                     numWheelRange.Enabled = true;
                     bManMoveMax.Enabled = true;
@@ -107,8 +107,8 @@ namespace FSUIPC_Link_JC1
                     button1.Enabled = false;
                     rdoWheelFast.Enabled = false;
                     rdoWheelSlow.Enabled = false;
-                    rdoWheelRight.Enabled = false;
-                    rdoWheelLeft.Enabled = false;
+                    rdoWheel_Left.Enabled = false;
+                    rdoWheel_Right.Enabled = false;
                     vManualApMove.Enabled = false;
                     numWheelRange.Enabled = false;
                     bManMoveMax.Enabled = false;
@@ -303,9 +303,11 @@ namespace FSUIPC_Link_JC1
 
             textDiag.Text = movepos.ToString();
             textBox1.Text = trimIndicator.Value.ToString();
-            if (movepos != (UInt16)((1-((trimIndicator.Value + 16383) / 32767.0)) * 65535))
+            //if (movepos != (UInt16)((1-((trimIndicator.Value + 16383) / 32767.0)) * 65535))
+            if (movepos != (UInt16)(((trimIndicator.Value + 16383) / 32767.0) * 65535))
             {
-                movepos = (UInt16)((1-((trimIndicator.Value + 16383) / 32767.0)) * 65535);
+                //movepos = (UInt16)((1-((trimIndicator.Value + 16383) / 32767.0)) * 65535);
+                movepos = (UInt16)(((trimIndicator.Value + 16383) / 32767.0) * 65535);
                 cmdmove = ">t," + movepos + ";";
                 
             msg = Encoding.UTF8.GetBytes(cmdmove);
@@ -447,7 +449,8 @@ namespace FSUIPC_Link_JC1
 
         private void vManualApMove_ValueChanged(object sender, EventArgs e)
         {
-            movepos = (UInt16)((1-((vManualApMove.Value + 16383) / 32767.0)) * 65535);
+            //movepos = (UInt16)((1-((vManualApMove.Value + 16383) / 32767.0)) * 65535);
+            movepos = (UInt16)(((vManualApMove.Value + 16383) / 32767.0) * 65535);
             cmdmove = ">t," + movepos + ";";
             textDiag.Text = cmdmove.ToString();
             msg = Encoding.UTF8.GetBytes(cmdmove);
@@ -480,22 +483,24 @@ namespace FSUIPC_Link_JC1
             serialPort.Disconnect();
         }
 
-        private void rdoWheelRight_CheckedChanged(object sender, EventArgs e)
+        private void rdoWheel_Left_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdoWheelRight.Checked)
+            if (rdoWheel_Left.Checked)
             {
                 string _ts = ">invert,-1;";
+                //string _ts = ">invert,1;";
                 msg = Encoding.UTF8.GetBytes(_ts);
                 textDiag.Text = _ts;
                 serialPort.SendMessage(msg);
             }
         }
 
-        private void rdoWheelLeft_CheckedChanged(object sender, EventArgs e)
+        private void rdoWheel_Right_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdoWheelLeft.Checked)
+            if (rdoWheel_Right.Checked)
             {
                 string _ts = ">invert,1;";
+                //string _ts = ">invert,-1;";
                 msg = Encoding.UTF8.GetBytes(_ts);
                 textDiag.Text = _ts;
                 serialPort.SendMessage(msg);
@@ -540,6 +545,16 @@ namespace FSUIPC_Link_JC1
         {
             rdoWheelFast.Checked = true;
             numWheelRange.Value = 4;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void vManualApMove_Scroll_1(object sender, ScrollEventArgs e)
+        {
+
         }
 
         private void btnSerialConnect_Click(object sender, EventArgs e)
